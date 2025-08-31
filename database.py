@@ -2,10 +2,10 @@ import mysql.connector
 
 # Konfigurasi Database MySQL
 db_config = {
-    'host': 'localhost',
+    'host': 'mysql.railway.internal',
     'user': 'root',
-    'password': 'root',
-    'database': 'deteksi_hoaks'
+    'password': 'gNGAYynyBIbWHvDrncmQIVnuhGBscwTf',
+    'database': 'railway'
 }
 
 def get_db_connection():
