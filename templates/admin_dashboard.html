@@ -9,32 +9,72 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Menyesuaikan posisi dan z-index untuk menu mobile */
+        #mobile-menu {
+            position: absolute;
+            top: 100%; /* Agar muncul di bawah navbar */
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9); /* Latar belakang semi-transparan */
+            backdrop-filter: blur(10px);
+            border-bottom-left-radius: 0.75rem; /* rounded-xl */
+            border-bottom-right-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            z-index: 50; /* Pastikan lebih tinggi dari card konten */
+        }
+        #mobile-menu a {
+            color: #1f2937; /* Darker text for better contrast on light background */
+            padding: 0.75rem 1rem;
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        #mobile-menu a:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body class="min-h-screen">
     <div id="bg-news" style="position:fixed;z-index:0;left:0;top:0;width:100vw;height:100vh;overflow:hidden;">
         <img src="{{ url_for('static', filename='css/news.jpg') }}" alt="news background" style="width:100vw;height:100vh;object-fit:cover;filter:brightness(0.5) blur(1px);">
         <div style="position:absolute;left:0;top:0;width:100vw;height:100vh;background:linear-gradient(120deg,rgba(44,83,100,0.5),rgba(20,30,48,0.5));"></div>
     </div>
-    <nav class="bg-white bg-opacity-20 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-white border-opacity-20">
+
+    <nav class="bg-white bg-opacity-20 backdrop-blur-lg fixed top-0 left-0 right-0 z-20 border-b border-white border-opacity-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0">
                     <a href="{{ url_for('admin_dashboard') }}" class="text-white font-bold text-xl">Admin Dashboard</a>
                 </div>
-                <div>
+                <div class="hidden md:block">
                     <a href="{{ url_for('logout') }}" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium transition duration-200">
                         Logout
                     </a>
                 </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{{ url_for('add_admin') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-200">Tambah Admin</a>
+                <a href="{{ url_for('export_history_csv') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-200">Export CSV</a>
+                <a href="{{ url_for('logout') }}" class="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-100">Logout</a>
             </div>
         </div>
     </nav>
 
     <main class="w-full pt-24 pb-12 px-4">
-        <div class="main-card max-w-7xl mx-auto rounded-2xl p-6 md:p-8">
+        <div class="main-card max-w-7xl mx-auto rounded-2xl p-6 md:p-8" style="position:relative;z-index:10;">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-extrabold text-gray-900">Riwayat Prediksi</h2>
-                <div class="flex gap-2">
+                <div class="hidden md:flex gap-2">
                     <a href="{{ url_for('add_admin') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold text-sm">Tambah Admin</a>
                     <a href="{{ url_for('export_history_csv') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm">Export CSV</a>
                 </div>
@@ -101,5 +141,14 @@
             </div>
         </div>
     </main>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

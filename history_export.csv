@@ -1,4 +1,13 @@
 id,text,prediction,confidence,timestamp
+16,Kampus Universitas Hamzanwadi Melakukan Pungli pada Mahasiswa Karena Rektor Gagal dalam Pencalonan sebagai Gubernur,REAL,90.9176,2025-08-31 00:32:02
+15,"Anies Baswedan Mengatakan Bahwa Dirinya Akan Menjadikan Indonesia sebagai Negara dengan Tingkat Korupsi Terendah di Dunia""",FAKE,99.3419,2025-08-31 00:31:53
+14,Kampus Universitas Hamzanwadi Melakukan Pungli pada Mahasiswa Karena Rektor Gagal dalam Pencalonan sebagai Gubernur,REAL,90.9176,2025-08-31 00:30:53
+13,Kampus Universitas Hamzanwadi Melakukan Pungli pada Mahasiswa Karena Rektor Gagal dalam Pencalonan sebagai Gubernur,REAL,90.9176,2025-08-31 00:29:46
+12,Kampus Universitas Hamzanwadi Melakukan Pungli pada Mahasiswa Karena Rektor Gagal dalam Pencalonan sebagai Gubernur,REAL,90.9176,2025-08-31 00:29:37
+11,Jadwal Siaran Langsung Debut Megawati di Manisa BBSK,REAL,95.7366,2025-08-31 00:26:24
+10,Surat Panggilan Tes Calon Karyawan PT Erajaya Swasembada Tbk,FAKE,99.0268,2025-08-31 00:26:03
+9,Jadwal Siaran Langsung Debut Megawati di Manisa BBSK,REAL,95.7366,2025-08-31 00:25:35
+8,Lowongan Kerja Bank Syariah Indonesia untuk Lulusan SMA/SMK Sederajat,FAKE,70.188,2025-08-17 22:40:13
 7,"""Menteri BUMN Tunjuk Direktur Utama Baru untuk Pelindo",REAL,96.9678,2025-08-11 01:22:20
 6,Ganjar Pranowo Mengatakan “Saya akan menghapus utang negara dalam waktu 5 tahun,FAKE,78.7802,2025-08-11 01:22:07
 5,"""Kominfo Ajak Masyarakat Perangi Hoaks dan Ujaran Kebencian""",REAL,93.8626,2025-08-11 01:05:30
