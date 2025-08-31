@@ -1,0 +1,7 @@
+id,text,prediction,confidence,timestamp
+7,"""Menteri BUMN Tunjuk Direktur Utama Baru untuk Pelindo",REAL,96.9678,2025-08-11 01:22:20
+6,Ganjar Pranowo Mengatakan “Saya akan menghapus utang negara dalam waktu 5 tahun,FAKE,78.7802,2025-08-11 01:22:07
+5,"""Kominfo Ajak Masyarakat Perangi Hoaks dan Ujaran Kebencian""",REAL,93.8626,2025-08-11 01:05:30
+4,Lowongan Kerja Mengatasnamakan PT Bank Mandiri (Persero) Tbk,FAKE,99.3897,2025-08-11 00:41:26
+3,Kapolri Jenderal Listyo Sigit Prabowo Lantik Sejumlah Kapolda Baru,REAL,96.1431,2025-08-10 16:33:50
+2,Ganjar Pranowo Mengatakan “Saya akan menghapus utang negara dalam waktu 5 tahun”,FAKE,78.7802,2025-08-10 15:56:50

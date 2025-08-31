@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - AI Hoax Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div id="bg-news" style="position:fixed;z-index:0;left:0;top:0;width:100vw;height:100vh;overflow:hidden;">
+        <img src="{{ url_for('static', filename='css/news.jpg') }}" alt="news background" style="width:100vw;height:100vh;object-fit:cover;filter:brightness(0.5) blur(1px);">
+        <div style="position:absolute;left:0;top:0;width:100vw;height:100vh;background:linear-gradient(120deg,rgba(44,83,100,0.5),rgba(20,30,48,0.5));"></div>
+    </div>
+
+    <div class="main-card w-full max-w-md mx-auto rounded-2xl p-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold text-gray-900">Admin Area</h1>
+            <p class="text-gray-600 mt-2">Silakan login untuk mengakses dashboard.</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg" role="alert">
+                        <p class="font-bold">Error</p>
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            <div class="mb-5">
+                <label for="username" class="block mb-2 text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" name="username" class="custom-textarea w-full p-3 border border-gray-300 rounded-lg focus:ring-0 focus:border-transparent transition duration-200" required>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="password" class="custom-textarea w-full p-3 border border-gray-300 rounded-lg focus:ring-0 focus:border-transparent transition duration-200" required>
+            </div>
+            <button type="submit" class="gradient-button w-full text-white font-bold py-3 px-4 rounded-lg focus:outline-none">
+                <span>Login Securely</span>
+            </button>
+        </form>
+         <div class="text-center mt-6">
+            <a href="{{ url_for('home') }}" class="text-sm text-indigo-600 hover:text-indigo-500 hover:underline">← Kembali ke Halaman Utama</a>
+        </div>
+    </div>
+
+</body>
+</html>

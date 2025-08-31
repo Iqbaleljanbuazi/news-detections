@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detektor Berita Hoaks</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <style>
+            html, body, input, textarea, button, select {
+                font-family: 'Poppins', 'Inter', 'Roboto', Arial, sans-serif !important;
+                font-smooth: always;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                letter-spacing: 0.01em;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Poppins', 'Inter', 'Roboto', Arial, sans-serif !important;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+            }
+            .main-card, .main-card * {
+                font-family: 'Poppins', 'Inter', 'Roboto', Arial, sans-serif !important;
+            }
+            ::selection {
+                background: #a5b4fc;
+                color: #1e293b;
+            }
+        </style>
+</head>
+<body class="min-h-screen">
+    <div id="bg-news" style="position:fixed;z-index:0;left:0;top:0;width:100vw;height:100vh;overflow:hidden;">
+        <img src="{{ url_for('static', filename='css/news.jpg') }}" alt="news background" style="width:100vw;height:100vh;object-fit:cover;filter:brightness(0.5) blur(1px);">
+        <div style="position:absolute;left:0;top:0;width:100vw;height:100vh;background:linear-gradient(120deg,rgba(44,83,100,0.5),rgba(20,30,48,0.5));"></div>
+    </div>
+
+    <nav class="bg-white bg-opacity-20 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-white border-opacity-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-white font-bold text-xl">AI Detector</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="{{ url_for('home') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium transition duration-200">Beranda</a>
+                    <a href="{{ url_for('about') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium transition duration-200">Tentang</a>
+                    <a href="{{ url_for('public_history') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium transition duration-200">Riwayat Prediksi</a> <!-- Tautan Riwayat Prediksi yang baru -->
+                    <a href="{{ url_for('login') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                        Admin Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="flex items-center justify-center w-full min-h-screen pt-20 p-4">
+        <div class="main-card w-full max-w-4xl mx-auto rounded-3xl p-0 shadow-2xl border border-white/20 bg-white/30 backdrop-blur-lg transition-all duration-300" style="position:relative;z-index:10;">
+            <div class="grid md:grid-cols-2 gap-0">
+                <!-- Kiri: Form -->
+                <div class="flex flex-col justify-center items-center p-8 md:p-12">
+                    <div class="w-full text-center mb-8">
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 drop-shadow-lg tracking-tight mb-2">AI Hoax Detector</h1>
+                        <p class="text-gray-700 text-lg font-medium mb-2">Sumber Berita :</p>
+                        <p class="text-gray-700 text-lg font-medium mb-2">www.cnnindonesia.com<br>kompas.com<br>turnbackhoax.id</p>
+                    </div>
+                    <form id="news-form" class="w-full flex flex-col gap-4">
+                        <textarea id="news-text" name="news_text" rows="10" class="w-full p-4 border-2 border-blue-200 bg-white/60 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-200 text-gray-800 placeholder-gray-500 shadow-inner resize-none text-base" placeholder="Salin dan tempel seluruh isi berita di sini..."></textarea>
+                        <button type="submit" id="detect-button" class="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-bold py-3 px-4 rounded-xl focus:outline-none flex items-center justify-center gap-2 shadow-lg transition-all duration-200 text-lg">
+                            <svg id="button-icon" class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            <span id="button-text">Analisis Teks</span>
+                        </button>
+                    </form>
+                </div>
+                <!-- Kanan: Hasil -->
+                <div id="result-column" class="flex items-center justify-center bg-white/20 rounded-r-3xl p-8 md:p-12 min-h-[420px]">
+                    <div class="w-full">
+                        <div id="initial-state" class="text-center text-gray-500 flex flex-col items-center justify-center">
+                            <svg class="w-24 h-24 mx-auto text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p class="mt-4 text-lg font-semibold">Hasil analisis akan muncul di sini.</p>
+                        </div>
+                        <div id="result-container" class="w-full text-center" style="display: none;">
+                            <div class="p-6 rounded-2xl bg-white/70 shadow-xl border border-blue-100 flex flex-col items-center">
+                                <h2 class="text-xl font-bold text-gray-800 mb-4">Hasil Analisis</h2>
+                                <div class="relative w-40 h-40 mx-auto mb-4">
+                                    <svg class="w-full h-full" viewBox="0 0 100 100">
+                                        <circle class="text-gray-200" stroke-width="10" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                                        <circle id="gauge-fill" class="gauge-fill" stroke-width="10" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" style="stroke-dasharray: 314; stroke-dashoffset: 314; transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                    </svg>
+                                    <div id="confidence-percent" class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-4xl font-extrabold text-blue-700 drop-shadow-lg"></div>
+                                </div>
+                                <p id="result-text" class="text-3xl font-bold mb-1"></p>
+                                <p class="text-gray-600">Tingkat Keyakinan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // --- SCRIPT JAVASCRIPT ANDA (TIDAK ADA PERUBAHAN) ---
+        const newsForm = document.getElementById('news-form');
+        const newsText = document.getElementById('news-text');
+        const detectButton = document.getElementById('detect-button');
+        const buttonText = document.getElementById('button-text');
+        const buttonIcon = document.getElementById('button-icon');
+        const resultColumn = document.getElementById('result-column');
+        const initialState = document.getElementById('initial-state');
+        const resultContainer = document.getElementById('result-container');
+        const resultText = document.getElementById('result-text');
+        const gaugeFill = document.getElementById('gauge-fill');
+        const confidencePercent = document.getElementById('confidence-percent');
+        newsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = newsText.value.trim();
+            if (text.length < 20) {
+                alert('Teks berita terlalu pendek. Mohon masukkan teks yang lebih panjang.');
+                return;
+            }
+            buttonText.textContent = 'Menganalisis...';
+            buttonIcon.innerHTML = `<div class="loader"></div>`;
+            detectButton.disabled = true;
+            initialState.style.display = 'none';
+            resultContainer.style.display = 'none';
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ news_text: text }),
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Gagal terhubung ke server.');
+                }
+                displayResult(data);
+            } catch (error) {
+                console.error('Error:', error);
+                displayResult({ prediction: 'ERROR', full_text: error.message, confidence: '0' });
+            } finally {
+                buttonText.textContent = 'Analisis Teks';
+                buttonIcon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>`;
+                detectButton.disabled = false;
+            }
+        });
+        function displayResult(data) {
+            resultContainer.style.display = 'block';
+            initialState.style.display = 'none';
+            const confidence = parseFloat(data.confidence) || 0;
+            const circumference = 2 * Math.PI * 40;
+            const offset = circumference - (confidence / 100) * circumference;
+            gaugeFill.style.strokeDashoffset = offset;
+            gaugeFill.classList.remove('text-green-500', 'text-red-500', 'text-gray-400');
+            confidencePercent.classList.remove('text-green-600', 'text-red-600', 'text-gray-500');
+            resultText.classList.remove('text-green-600', 'text-red-600', 'text-gray-500');
+            confidencePercent.textContent = `${confidence.toFixed(0)}%`;
+            resultText.textContent = data.full_text;
+            if (data.prediction === 'REAL') {
+                gaugeFill.classList.add('text-green-500');
+                confidencePercent.classList.add('text-green-600');
+                resultText.classList.add('text-green-600');
+            } else if (data.prediction === 'FAKE') {
+                gaugeFill.classList.add('text-red-500');
+                confidencePercent.classList.add('text-red-600');
+                resultText.classList.add('text-red-600');
+            } else {
+                gaugeFill.classList.add('text-gray-400');
+                confidencePercent.classList.add('text-gray-500');
+                resultText.classList.add('text-gray-500');
+                confidencePercent.textContent = `!`;
+            }
+        }
+    </script>
+</body>
+</html>

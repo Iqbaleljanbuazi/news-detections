@@ -1,0 +1,194 @@
+/* --- Latar Belakang & Font Global --- */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Latar belakang gradien yang bergerak perlahan */
+    background: linear-gradient(-45deg, #6b21a8, #4f46e5, #1d4ed8, #0ea5e9);
+    background-size: 400% 400%;
+    animation: gradientBG 18s ease infinite;
+    color: #1f2937;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Kartu Utama dengan Efek Glass & Shadow --- */
+.main-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Animasi bayangan yang "bernapas" */
+    animation: pulseShadow 6s infinite ease-in-out;
+}
+
+@keyframes pulseShadow {
+    0% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); }
+    50% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
+    100% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); }
+}
+
+/* --- Styling Input & Tombol --- */
+.custom-textarea {
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Efek glow saat textarea di-klik */
+.custom-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4), 0 0 20px rgba(79, 70, 229, 0.2);
+    border-color: #6366f1 !important; /* Menggunakan !important untuk menimpa Tailwind */
+}
+
+.gradient-button {
+    /* Gradien untuk tombol */
+    background-image: linear-gradient(to right, #4f46e5 0%, #818cf8 51%, #4f46e5 100%);
+    background-size: 200% auto;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 15px 0 rgba(79, 70, 229, 0.5);
+}
+
+.gradient-button:hover {
+    background-position: right center; /* Menggerakkan gradien saat hover */
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.4);
+}
+
+/* --- Scrollbar Kustom --- */
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+textarea::-webkit-scrollbar-track {
+    background: rgba(229, 231, 235, 0.5);
+    border-radius: 10px;
+}
+textarea::-webkit-scrollbar-thumb {
+    background-color: #4f46e5;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #4338ca;
+}
+
+/* --- Hasil Analisis & Animasi --- */
+.result-container {
+    /* Animasi muncul dengan efek 'pop' */
+    animation: popIn 0.6s cubic-bezier(0.68, -0.6, 0.27, 1.6) forwards;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Animasi untuk Gauge (Lingkaran Persentase) */
+@keyframes fillGauge {
+    from { stroke-dashoffset: 314; }
+}
+.gauge-fill {
+    animation: fillGauge 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Ikon Loading (Spinner) */
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* --- Latar Belakang & Font Global --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(-45deg, #6b21a8, #4f46e5, #1d4ed8, #0ea5e9);
+    background-size: 400% 400%;
+    animation: gradientBG 18s ease infinite;
+    color: #1f2937;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Kartu Utama dengan Efek Glass & Shadow --- */
+.main-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: pulseShadow 6s infinite ease-in-out;
+}
+
+@keyframes pulseShadow {
+    0% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); }
+    50% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
+    100% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); }
+}
+
+/* --- Styling Input & Tombol --- */
+.custom-textarea {
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease-in-out;
+}
+.custom-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4), 0 0 20px rgba(79, 70, 229, 0.2);
+    border-color: #6366f1 !important;
+}
+
+.gradient-button {
+    background-image: linear-gradient(to right, #4f46e5 0%, #818cf8 51%, #4f46e5 100%);
+    background-size: 200% auto;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 15px 0 rgba(79, 70, 229, 0.5);
+}
+.gradient-button:hover {
+    background-position: right center;
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.4);
+}
+
+/* --- Scrollbar Kustom --- */
+textarea::-webkit-scrollbar { width: 10px; }
+textarea::-webkit-scrollbar-track { background: rgba(229, 231, 235, 0.5); border-radius: 10px; }
+textarea::-webkit-scrollbar-thumb { background-color: #4f46e5; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+textarea::-webkit-scrollbar-thumb:hover { background-color: #4338ca; }
+
+/* --- Hasil Analisis & Animasi --- */
+.result-container {
+    animation: popIn 0.6s cubic-bezier(0.68, -0.6, 0.27, 1.6) forwards;
+}
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Animasi untuk Gauge */
+@keyframes fillGauge { from { stroke-dashoffset: 314; } }
+.gauge-fill { animation: fillGauge 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+
+/* Ikon Loading (Spinner) */
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+

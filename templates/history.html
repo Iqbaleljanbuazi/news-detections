@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Prediksi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="min-h-screen" style="background: linear-gradient(-45deg, #6b21a8, #4f46e5, #1d4ed8, #0ea5e9); background-size: 400% 400%; animation: gradientBG 18s ease infinite;">
+    <div id="bg-news" style="position:fixed;z-index:0;left:0;top:0;width:100vw;height:100vh;overflow:hidden;">
+        <img src="{{ url_for('static', filename='css/news.jpg') }}" alt="news background" style="width:100vw;height:100vh;object-fit:cover;filter:brightness(0.5) blur(1px);">
+        <div style="position:absolute;left:0;top:0;width:100vw;height:100vh;background:linear-gradient(120deg,rgba(44,83,100,0.5),rgba(20,30,48,0.5));"></div>
+    </div>
+    <nav class="bg-white bg-opacity-20 backdrop-blur-lg fixed top-0 left-0 right-0 z-10 border-b border-white border-opacity-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-white font-bold text-xl">AI Detector</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="{{ url_for('home') }}" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Beranda</a>
+                    <a href="{{ url_for('about') }}" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tentang</a>
+                    <a href="{{ url_for('admin_dashboard') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium">Riwayat Prediksi</a>
+                    <a href="{{ url_for('login') }}" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Admin Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="w-full pt-24 pb-12 px-4">
+    <div class="main-card max-w-7xl mx-auto rounded-2xl p-6 md:p-8 bg-white border-2 border-blue-400 shadow-xl">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Riwayat Prediksi Berita</h2>
+            <div class="overflow-x-auto">
+                <div class="align-middle inline-block min-w-full">
+                    <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200 border border-blue-300 rounded-xl overflow-hidden">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider border border-blue-300">Teks Berita</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider border border-blue-300">Prediksi</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider border border-blue-300">Keyakinan</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider border border-blue-300">Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                {% for item in history %}
+                                <tr class="hover:bg-gray-100 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap border border-blue-200">
+                                        <div class="text-sm text-gray-900">{{ item.text[:80] }}...</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap border border-blue-200">
+                                        {% if item.prediction == 'FAKE' %}
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                Hoax
+                                            </span>
+                                        {% else %}
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Valid
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium border border-blue-200">{{ "%.2f"|format(item.confidence) }}%</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border border-blue-200">{{ item.timestamp.strftime('%d %b %Y, %H:%M') }}</td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-10 text-gray-500 border border-blue-200">Belum ada riwayat prediksi untuk ditampilkan.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

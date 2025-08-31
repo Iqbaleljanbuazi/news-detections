@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Riwayat Prediksi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 bg-gray-100">
+    <div class="main-card w-full max-w-lg mx-auto rounded-2xl p-8 bg-white shadow-xl">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-6">Edit Riwayat Prediksi</h1>
+        <form method="post">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Teks Berita</label>
+                <textarea name="text" class="w-full p-3 border border-gray-300 rounded-lg" rows="4" required>{{ data.text }}</textarea>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Prediksi</label>
+                <select name="prediction" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                    <option value="REAL" {% if data.prediction == 'REAL' %}selected{% endif %}>Valid</option>
+                    <option value="FAKE" {% if data.prediction == 'FAKE' %}selected{% endif %}>Hoax</option>
+                </select>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2">Keyakinan (%)</label>
+                <input type="number" name="confidence" min="0" max="100" step="0.01" class="w-full p-3 border border-gray-300 rounded-lg" value="{{ data.confidence }}" required>
+            </div>
+            <div class="flex justify-between">
+                <a href="{{ url_for('admin_dashboard') }}" class="text-gray-600 hover:underline">← Kembali</a>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">Simpan</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

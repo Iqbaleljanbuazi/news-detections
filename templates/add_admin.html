@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Admin Baru</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="min-h-screen">
+    <div id="bg-news" style="position:fixed;z-index:0;left:0;top:0;width:100vw;height:100vh;overflow:hidden;">
+        <img src="{{ url_for('static', filename='css/news.jpg') }}" alt="news background" style="width:100vw;height:100vh;object-fit:cover;filter:brightness(0.5) blur(1px);">
+        <div style="position:absolute;left:0;top:0;width:100vw;height:100vh;background:linear-gradient(120deg,rgba(44,83,100,0.5),rgba(20,30,48,0.5));"></div>
+    </div>
+    <main class="flex items-center justify-center w-full min-h-screen pt-20 p-4">
+        <div class="main-card w-full max-w-md mx-auto rounded-2xl p-8 bg-white/30 backdrop-blur-lg shadow-2xl border border-white/20" style="position:relative;z-index:10;">
+            <h1 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">Tambah Admin Baru</h1>
+            <form method="post">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Username</label>
+                    <input type="text" name="username" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Password</label>
+                    <input type="password" name="password" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="flex justify-between">
+                    <a href="{{ url_for('admin_dashboard') }}" class="text-gray-600 hover:underline">← Kembali</a>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
