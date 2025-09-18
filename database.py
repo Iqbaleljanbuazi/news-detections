@@ -4,7 +4,7 @@ import mysql.connector
 db_config = {
     'host': 'mysql.railway.internal',
     'user': 'root',
-    'password': 'gNGAYynyBIbWHvDrncmQIVnuhGBscwTf',
+    'password': 'OYngLAfwuiwfxPyisstmaYjNBlntwWJh',
     'database': 'railway'
 }
 
